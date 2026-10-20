@@ -1,0 +1,13 @@
+name: Mission Control CI
+on: push
+
+jobs:
+  hello:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Powitanie
+        run: echo "Czesc, to moj pierwszy workflow!"
+      - name: Informacje o srodowisku
+        run: |
+          pwd
+          uname -a
