@@ -7,7 +7,25 @@ jobs:
     steps:
       - name: Powitanie
         run: echo "Czesc, to moj pierwszy workflow!"
-      - name: Informacje o srodowisku
+
+      - name: Pobierz kod repozytorium
+        uses: actions/checkout@v4
+
+      - name: Przygotuj .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Przygotuj Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Sprawdz pliki i wersje narzedzi
         run: |
-          pwd
-          uname -a
+          test -f MissionControl.slnx
+          test -f global.json
+          test -f .nvmrc
+          dotnet --version
+          node --version
+          npm --version
