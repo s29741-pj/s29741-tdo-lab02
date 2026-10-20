@@ -216,3 +216,22 @@ a nie rozwiązaniem zadania CI.
 
 Kod pochodzi z [publicznych materiałów kursu, rewizja `ccc9850`](https://github.com/PJMPR/TDO-lecures/tree/ccc985008e51da48bbdf7a6d5fd889bb65383e60/projects/docker-lab-starter).
 Repozytorium ma niezależną historię i zawiera wyłącznie czysty stan początkowy zajęć 2.
+
+
+z1 
+6ca0bea83bb64cf95f8d8e98092964f93a2b1c2
+https://github.com/s29741-pj/s29741-tdo-lab02/actions/runs/39499725348
+
+z2
+153c1a2a450bf1ae0b22a60cbd1347563ccbd108
+https://github.com/s29741-pj/s29741-tdo-lab02/actions/runs/39504037691
+
+z3
+test
+
+
+
+
+
+
+
