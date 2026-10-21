@@ -52,7 +52,8 @@ jobs:
           npm --version
 
       - name: Pokaz wybrana konfiguracje
-        run: echo "Konfiguracja budowania: $BUILD_CONFIGURATION"
+        run: |
+          echo "Konfiguracja budowania: $BUILD_CONFIGURATION"
 
       - name: Dodatkowa diagnostyka
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.extra_diagnostics }}
