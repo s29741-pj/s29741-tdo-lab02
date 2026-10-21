@@ -227,9 +227,10 @@ z2
 https://github.com/s29741-pj/s29741-tdo-lab02/actions/runs/39504037691
 
 z3
-test
-
-
+6993ab06fc5eae9fa950f49435b484743874ccd2
+https://github.com/s29741-pj/s29741-tdo-lab02/actions/runs/39505803492
+https://github.com/s29741-pj/s29741-tdo-lab02/actions/runs/39506044493	
+https://github.com/s29741-pj/s29741-tdo-lab02/actions/runs/39506200564
 
 
 
