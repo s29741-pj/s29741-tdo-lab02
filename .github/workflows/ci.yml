@@ -1,13 +1,30 @@
 name: Mission Control CI
+run-name: ${{ github.event_name }} / ${{ inputs.configuration || 'Release' }}
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      configuration:
+        description: Konfiguracja budowania
+        type: choice
+        options:
+          - Release
+          - Debug
+        default: Release
+      extra_diagnostics:
+        description: Wypisz dodatkowe informacje diagnostyczne
+        type: boolean
+        default: false
 
 jobs:
   hello:
     runs-on: ubuntu-24.04
+    env:
+      BUILD_CONFIGURATION: ${{ inputs.configuration || 'Release' }}
     steps:
       - name: Powitanie
         run: echo "Czesc, to moj pierwszy workflow!"
@@ -33,3 +50,12 @@ jobs:
           dotnet --version
           node --version
           npm --version
+
+      - name: Pokaz wybrana konfiguracje
+        run: echo "Konfiguracja budowania: $BUILD_CONFIGURATION"
+
+      - name: Dodatkowa diagnostyka
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.extra_diagnostics }}
+        run: |
+          dotnet --info
+          docker version
