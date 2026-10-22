@@ -57,3 +57,31 @@ jobs:
 
       - name: Uruchom testy backendu
         run: dotnet test MissionControl.slnx --configuration "$BUILD_CONFIGURATION"
+
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - name: Pobierz kod repozytorium
+        uses: actions/checkout@v4
+
+      - name: Przygotuj Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Sprawdz lockfile frontendu
+        run: test -f package-lock.json
+
+      - name: Zainstaluj zaleznosci
+        run: npm ci
+
+      - name: Zbuduj frontend
+        run: npm run build
+
+      - name: Uruchom testy frontendu
+        run: npm test
