@@ -21,14 +21,12 @@ on:
         default: false
 
 jobs:
-  hello:
+  backend:
+    name: Backend
     runs-on: ubuntu-24.04
     env:
       BUILD_CONFIGURATION: ${{ inputs.configuration || 'Release' }}
     steps:
-      - name: Powitanie
-        run: echo "Czesc, to moj pierwszy workflow!"
-
       - name: Pobierz kod repozytorium
         uses: actions/checkout@v4
 
@@ -37,26 +35,25 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Przygotuj Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-
-      - name: Sprawdz pliki i wersje narzedzi
-        run: |
-          test -f MissionControl.slnx
-          test -f global.json
-          test -f .nvmrc
-          dotnet --version
-          node --version
-          npm --version
-
-      - name: Pokaz wybrana konfiguracje
-        run: |
-          echo "Konfiguracja budowania: $BUILD_CONFIGURATION"
+      - name: Sprawdz Docker
+        run: docker version
 
       - name: Dodatkowa diagnostyka
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.extra_diagnostics }}
         run: |
           dotnet --info
-          docker version
+          docker info
+
+      - name: Sprawdz lockfiles backendu
+        run: |
+          test -f backend/packages.lock.json
+          test -f backend.tests/packages.lock.json
+
+      - name: Przywroc zaleznosci (locked)
+        run: dotnet restore MissionControl.slnx --locked-mode
+
+      - name: Zbuduj backend
+        run: dotnet build MissionControl.slnx --configuration "$BUILD_CONFIGURATION"
+
+      - name: Uruchom testy backendu
+        run: dotnet test MissionControl.slnx --configuration "$BUILD_CONFIGURATION"
