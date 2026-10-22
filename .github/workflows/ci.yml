@@ -50,11 +50,6 @@ jobs:
           dotnet --version
           node --version
           npm --version
-      - name: Kontrolowany blad
-        run: |
-          echo "::warning file=README.md,line=1::To jest ostrzezenie cwiczeniowe"
-          echo "::error file=README.md,line=1::Kontrolowany blad konfiguracji CI"
-          exit 1
 
       - name: Pokaz wybrana konfiguracje
         run: |
